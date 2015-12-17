@@ -7,6 +7,19 @@
 <body>
 <span>Hello World</span>
 Name:<input data-bind='value: name'><span data-bind='text: name()'></span></input>
+
+<table>
+    <thead>
+    <tr><th>First name</th><th>Last name</th></tr>
+    </thead>
+    <tbody data-bind="foreach: players">
+    <tr>
+        <td data-bind="text: firstName"></td>
+        <td data-bind="text: lastName"></td>
+    </tr>
+    </tbody>
+</table>
+
 <script src="../dist/scripts/main.js"></script>
 </body>
 </html>
