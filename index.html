@@ -5,9 +5,7 @@
     <title>Hello</title>
 </head>
 <body>
-<span>Hello World</span>
-Name:<input data-bind='value: name'><span data-bind='text: name'></span></input>
-
+<span>RX Players</span>
 <table>
     <thead>
     <tr><th>First name</th><th>Last name</th><th>Team name</th></tr>
@@ -23,11 +21,9 @@ Name:<input data-bind='value: name'><span data-bind='text: name'></span></input>
     <tr>
         <td><input type="text" data-bind="value: inputFirstName"></td>
         <td><input type="text" data-bind="value: inputLastName"></td>
-        <td><select name="example">
-            <option value="A">A</option>
-            <option value="B">A</option>
-            <option value="-">Other</option>
-        </select></td>
+        <td><select data-bind="options: teams,
+                               optionsText: 'teamName',
+                               value: selectedTeam"></select></td>
         <td><button data-bind="click: playerInsert">Insert</button></td>
 
     </tr>
