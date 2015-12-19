@@ -17,7 +17,7 @@ Name:<input data-bind='value: name'><span data-bind='text: name'></span></input>
         <td data-bind="text: firstName"></td>
         <td data-bind="text: lastName"></td>
         <td data-bind="text: teamName"></td>
-        <td><button>Delete</button></td>
+        <td><button data-bind="click: $root.playerDelete.bind($data)">Delete</button></td>
     </tr>
     </tbody>
     <tr>
@@ -28,7 +28,7 @@ Name:<input data-bind='value: name'><span data-bind='text: name'></span></input>
             <option value="B">A</option>
             <option value="-">Other</option>
         </select></td>
-        <td><button data-bind="click: showViewModel">Insert</button></td>
+        <td><button data-bind="click: playerInsert">Insert</button></td>
 
     </tr>
 </table>

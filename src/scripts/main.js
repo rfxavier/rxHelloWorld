@@ -6,10 +6,8 @@ var $ = require('jquery');
 
 var app = {
     init: function (){
-        model.init();
+        model.applyKoBindings();
     }
 };
 
 app.init();
-
-model.applyKoBindings();
