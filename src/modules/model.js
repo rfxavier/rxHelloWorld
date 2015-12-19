@@ -16,16 +16,46 @@ var viewModel = function() {
         firstName: self.inputFirstName,
         lastName: self.inputLastName
     };
+    self.mousedOverTeam = ko.observable({});
+    self.mousedOverTeamName = ko.pureComputed(function() {
+        //var retTeamName = '';
+        //
+        //if (self.mousedOverTeam().teamName) {
+        //    retTeamName = 'Team ' + self.mousedOverTeam().teamName;
+        //}
+        //
+        //return retTeamName;
+        return self.mousedOverTeam().teamName || ''
+    });
+    self.mousedOverTeamNameTitle = ko.pureComputed((function() {
+        return self.mousedOverTeamName() + " players";
+    }));
+
+    //self.mousedOverTeamPlayers = self.mousedOverTeam().players;
+    self.mousedOverTeamPlayers = ko.computed(function() {
+        return self.mousedOverTeam().players;
+    });
+
+    self.getPlayerFullName = function(item) {
+        return item.firstName + " " + item.lastName;
+    };
+
+    self.getTeamDetails = function (player) {
+        var filteredTeam = $.grep(self.teams(), function(obj) {
+            return obj.teamName === player.teamName;
+        });
+
+        //filteredTeam[0] = 1st element in teams() it finds
+        self.mousedOverTeam(filteredTeam[0]);
+    };
 
     self.playerInsert = function () {
         self.playerData.teamId = self.selectedTeam().teamId;
 
-        console.log(ko.toJSON(self.playerData));
         self.insertPlayer(ko.toJSON(self.playerData));
     };
 
     self.playerDelete = function (player) {
-        console.log('/' + player.playerId);
         self.deletePlayer(player.playerId);
     };
 
@@ -38,10 +68,13 @@ var viewModel = function() {
         })
         .done(function(data, textStatus, jqXHR) {
             self.teams(data);
+            //console.log(self.teams());
+
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus + "; " + errorThrown)
         });
+
     };
 
     self.getPlayers = function() {
@@ -54,7 +87,6 @@ var viewModel = function() {
         })
         .done(function(data, textStatus, jqXHR) {
             self.players(data);
-            console.log(self.players());
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus + "; " + errorThrown)
@@ -70,14 +102,15 @@ var viewModel = function() {
                 data: playerData
         })
         .done(function(data, textStatus, jqXHR) {
-            console.log('POST done');
             self.inputFirstName('');
             self.inputLastName('');
+            //Refresh players and teams object arrays
             self.getPlayers();
+            self.getTeams();
+            //if  self.mousedOverTeam is the same teams as just inserted, then self.getTeamDetails
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
             //console.log(jqXHR + "; " + textStatus + "; " + errorThrown)
-            console.log(jqXHR.responseJSON.message);
             alert(jqXHR.responseJSON.message)
         });
     };
@@ -93,18 +126,18 @@ var viewModel = function() {
 
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
-            console.log("RX" + textStatus + "; " + errorThrown)
+            console.log(textStatus + "; " + errorThrown)
         });
     };
 
     //initialization when "new" is called
     self.getTeams();
     self.getPlayers();
+
 };
 
 module.exports = {
-    applyKoBindings : function () {
-    console.log('Apply ko bindings');
+    init : function () {
     ko.applyBindings(new viewModel());
     }
 };

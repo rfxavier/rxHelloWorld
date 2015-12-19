@@ -14,7 +14,8 @@
     <tr>
         <td data-bind="text: firstName"></td>
         <td data-bind="text: lastName"></td>
-        <td data-bind="text: teamName"></td>
+        <td data-bind="text: teamName, event: { mouseover: $root.getTeamDetails.bind($data) }"></td>
+        <!--<td data-bind="text: teamName, event: { click: $root.getTeamDetails(teamName) }"></td>-->
         <td><button data-bind="click: $root.playerDelete.bind($data)">Delete</button></td>
     </tr>
     </tbody>
@@ -28,6 +29,19 @@
 
     </tr>
 </table>
+<div>
+    <table>
+        <thead>
+        <tr><th data-bind="text: mousedOverTeamNameTitle"></th></tr>
+        </thead>
+        <tbody data-bind="foreach: mousedOverTeamPlayers">
+        <tr>
+            <td><span data-bind="text: $root.getPlayerFullName($data);"></span></td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
 
 <script src="../dist/scripts/main.js"></script>
 </body>
