@@ -36,6 +36,10 @@ var viewModel = function() {
         return self.mousedOverTeam().players;
     });
 
+    self.mousedOutTeam = function() {
+        self.mousedOverTeam({});
+    };
+
     self.getPlayerFullName = function(item) {
         return item.firstName + " " + item.lastName;
     };
@@ -122,8 +126,9 @@ var viewModel = function() {
                 crossDomain: true
         })
         .done(function(data, textStatus, jqXHR) {
+            //Refresh players and teams object arrays
             self.getPlayers();
-
+            self.getTeams();
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus + "; " + errorThrown)

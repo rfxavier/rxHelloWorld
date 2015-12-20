@@ -14,7 +14,7 @@
     <tr>
         <td data-bind="text: firstName"></td>
         <td data-bind="text: lastName"></td>
-        <td data-bind="text: teamName, event: { mouseover: $root.getTeamDetails.bind($data) }"></td>
+        <td data-bind="text: teamName, event: { mouseover: $root.getTeamDetails.bind($data), mouseout: $root.mousedOutTeam }"></td>
         <!--<td data-bind="text: teamName, event: { click: $root.getTeamDetails(teamName) }"></td>-->
         <td><button data-bind="click: $root.playerDelete.bind($data)">Delete</button></td>
     </tr>
@@ -29,7 +29,7 @@
 
     </tr>
 </table>
-<div>
+<div data-bind="visible: mousedOverTeamName()">
     <table>
         <thead>
         <tr><th data-bind="text: mousedOverTeamNameTitle"></th></tr>
