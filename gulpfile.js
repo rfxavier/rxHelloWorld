@@ -28,6 +28,8 @@ gulp.task('scripts', function() {
         debug: true
     });
 
+    b.transform('brfs');
+
     b.bundle()
         .pipe(source('main.js'))
         .pipe(buffer())

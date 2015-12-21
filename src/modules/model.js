@@ -141,8 +141,20 @@ var viewModel = function() {
 
 };
 
+var path = require('path');
+
 module.exports = {
     init : function () {
-    ko.applyBindings(new viewModel());
+        ko.components.register('nav-bar', {
+            template: {element: 'template-nav-bar'},
+            viewModel: function() {this.title = 'Component NavBar'}
+        });
+
+        ko.components.register('brfs-nav-bar', {
+            viewModel: require('../component/navbar'),
+            template: require('fs').readFileSync(path.join(__dirname, '/../component/navbar.html'), 'utf8')
+        });
+
+        ko.applyBindings(new viewModel());
     }
 };
