@@ -26,7 +26,7 @@ var playersViewModel = function() {
         //}
         //
         //return retTeamName;
-        return self.mousedOverTeam().teamName || ''
+        return self.mousedOverTeam().teamName || '';
     });
     self.mousedOverTeamNameTitle = ko.pureComputed((function() {
         return self.mousedOverTeamName() + " players";
@@ -77,7 +77,7 @@ var playersViewModel = function() {
 
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus + "; " + errorThrown)
+                console.log(textStatus + "; " + errorThrown);
             });
 
     };
@@ -94,7 +94,7 @@ var playersViewModel = function() {
                 self.players(data);
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus + "; " + errorThrown)
+                console.log(textStatus + "; " + errorThrown);
             });
     };
 
@@ -116,7 +116,7 @@ var playersViewModel = function() {
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
                 //console.log(jqXHR + "; " + textStatus + "; " + errorThrown)
-                alert(jqXHR.responseJSON.message)
+                alert(jqXHR.responseJSON.message);
             });
     };
 
@@ -132,7 +132,7 @@ var playersViewModel = function() {
                 self.getTeams();
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus + "; " + errorThrown)
+                console.log(textStatus + "; " + errorThrown);
             });
     };
 

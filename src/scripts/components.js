@@ -2,6 +2,8 @@
  * Created by RENATO on 21/12/2015.
  */
 
+/*jslint node: true */
+
 //All components must be registered in this single location
 
 'use strict';

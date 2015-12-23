@@ -43,3 +43,9 @@ gulp.task('scripts', function() {
         .pipe(browserSync.stream());
 });
 
+gulp.task('lint', function(){
+    gulp.src(['src/**/*.js'])
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'))
+});
+

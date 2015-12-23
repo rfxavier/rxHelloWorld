@@ -14,7 +14,7 @@ var router = function (config) {
     ko.utils.arrayForEach(config.routes, function(route) {
         crossroads.addRoute(route.url, function(requestParams) {
             self.currentRoute(ko.utils.extend(requestParams, route.params));
-        })
+        });
     });
     //crossroads.routed.add(console.log, console);
 
