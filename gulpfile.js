@@ -18,20 +18,23 @@ gulp.task('default', ['scripts','serve'], function () {
 
 gulp.task('serve', function() {
     browserSync.init({
-        server: './'
+        server: {
+            baseDir: './',
+            index: 'index2.html'
+        }
     });
 });
 
 gulp.task('scripts', function() {
     var b = browserify({
-        entries: 'src/scripts/main.js',
+        entries: 'src/scripts/main2.js',
         debug: true
     });
 
     b.transform('brfs');
 
     b.bundle()
-        .pipe(source('main.js'))
+        .pipe(source('main2.js'))
         .pipe(buffer())
         .pipe(sourceMaps.init({loadMaps: true}))
         .pipe(uglify())

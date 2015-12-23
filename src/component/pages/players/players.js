@@ -1,12 +1,11 @@
 /**
- * Created by RENATO on 12/12/2015.
+ * Created by RENATO on 22/12/2015.
  */
+
 var ko = require('knockout');
 var $ = require('jquery');
 
-var components = require('../scripts/components.js');
-
-var viewModel = function() {
+var playersViewModel = function() {
     var self = this;
 
     self.players = ko.observableArray();
@@ -71,15 +70,15 @@ var viewModel = function() {
                 type: 'GET',
                 dataType: 'jsonp',
                 data: {}
-        })
-        .done(function(data, textStatus, jqXHR) {
-            self.teams(data);
-            //console.log(self.teams());
+            })
+            .done(function(data, textStatus, jqXHR) {
+                self.teams(data);
+                //console.log(self.teams());
 
-        })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus + "; " + errorThrown)
-        });
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus + "; " + errorThrown)
+            });
 
     };
 
@@ -90,13 +89,13 @@ var viewModel = function() {
                 dataType: 'jsonp',
                 data: {},
                 cache: false
-        })
-        .done(function(data, textStatus, jqXHR) {
-            self.players(data);
-        })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus + "; " + errorThrown)
-        });
+            })
+            .done(function(data, textStatus, jqXHR) {
+                self.players(data);
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus + "; " + errorThrown)
+            });
     };
 
     self.insertPlayer = function(playerData) {
@@ -106,19 +105,19 @@ var viewModel = function() {
                 contentType: "application/json",
                 crossDomain: true,
                 data: playerData
-        })
-        .done(function(data, textStatus, jqXHR) {
-            self.inputFirstName('');
-            self.inputLastName('');
-            //Refresh players and teams object arrays
-            self.getPlayers();
-            self.getTeams();
-            //if  self.mousedOverTeam is the same teams as just inserted, then self.getTeamDetails
-        })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-            //console.log(jqXHR + "; " + textStatus + "; " + errorThrown)
-            alert(jqXHR.responseJSON.message)
-        });
+            })
+            .done(function(data, textStatus, jqXHR) {
+                self.inputFirstName('');
+                self.inputLastName('');
+                //Refresh players and teams object arrays
+                self.getPlayers();
+                self.getTeams();
+                //if  self.mousedOverTeam is the same teams as just inserted, then self.getTeamDetails
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                //console.log(jqXHR + "; " + textStatus + "; " + errorThrown)
+                alert(jqXHR.responseJSON.message)
+            });
     };
 
     self.deletePlayer = function(playerId) {
@@ -126,25 +125,29 @@ var viewModel = function() {
                 url: 'http://rfxavier-001-site3.btempurl.com/api/player/' + playerId,
                 type: 'DELETE',
                 crossDomain: true
-        })
-        .done(function(data, textStatus, jqXHR) {
-            //Refresh players and teams object arrays
-            self.getPlayers();
-            self.getTeams();
-        })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus + "; " + errorThrown)
-        });
+            })
+            .done(function(data, textStatus, jqXHR) {
+                //Refresh players and teams object arrays
+                self.getPlayers();
+                self.getTeams();
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus + "; " + errorThrown)
+            });
     };
 
     //initialization when "new" is called
     self.getTeams();
     self.getPlayers();
-
+    console.log('gotten Teams and Players');
 };
 
-module.exports = {
-    init : function () {
-        ko.applyBindings(new viewModel());
-    }
-};
+//var playersViewModelInstance = new playersViewModel();
+
+module.exports = playersViewModel;
+
+//module.exports = {
+//    init : function () {
+//        ko.applyBindings(new playersViewModel());
+//    }
+//};

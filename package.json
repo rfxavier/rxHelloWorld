@@ -12,10 +12,12 @@
     "brfs": "^1.4.1",
     "browser-sync": "^2.10.0",
     "browserify": "^12.0.1",
+    "crossroads": "^0.12.2",
     "gulp": "^3.9.0",
     "gulp-jshint": "^2.0.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.1",
+    "hasher": "^1.2.0",
     "jshint": "^2.8.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"

@@ -2,9 +2,9 @@
  * Created by RENATO on 20/12/2015.
  */
 
-var viewModelNavBar = function() {
+var viewModelNavBar = function(params) {
     var self = this;
-    self.title = 'Separate File Component NavBar'
+    self.route = params.route;
 };
 
 module.exports = viewModelNavBar;
