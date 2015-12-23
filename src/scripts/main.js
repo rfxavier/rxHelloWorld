@@ -1,16 +1,22 @@
 /**
- * Created by RENATO on 12/12/2015.
+ * Created by RENATO on 22/12/2015.
  */
 
 var components = require('./components.js');
-var model = require('./../modules/model.js');
+var router = require('./router.js');
+var ko = require('knockout');
 
 var app = {
     init: function (){
-        console.log('main.js init')
         components.register();
-        model.init();
+
+        var mainViewModel = {
+            route: router.currentRoute
+        };
+
+        ko.applyBindings(mainViewModel);
     }
 };
 
 app.init();
+

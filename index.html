@@ -2,48 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello</title>
+    <title>Title</title>
 </head>
 <body>
-<span>RX Players</span>
-<nav-bar></nav-bar>
-<table>
-    <thead>
-    <tr><th>First name</th><th>Last name</th><th>Team name</th></tr>
-    </thead>
-    <tbody data-bind="foreach: players">
-    <tr>
-        <td data-bind="text: firstName"></td>
-        <td data-bind="text: lastName"></td>
-        <td data-bind="text: teamName, event: { mouseover: $root.getTeamDetails.bind($data), mouseout: $root.mousedOutTeam }"></td>
-        <!--<td data-bind="text: teamName, event: { click: $root.getTeamDetails(teamName) }"></td>-->
-        <td><button data-bind="click: $root.playerDelete.bind($data)">Delete</button></td>
-    </tr>
-    </tbody>
-    <tr>
-        <td><input type="text" data-bind="value: inputFirstName"></td>
-        <td><input type="text" data-bind="value: inputLastName"></td>
-        <td><select data-bind="options: teams,
-                               optionsText: 'teamName',
-                               value: selectedTeam"></select></td>
-        <td><button data-bind="click: playerInsert">Insert</button></td>
-
-    </tr>
-</table>
-<div data-bind="visible: mousedOverTeamName()">
-    <table>
-        <thead>
-        <tr><th data-bind="text: mousedOverTeamNameTitle"></th></tr>
-        </thead>
-        <tbody data-bind="foreach: mousedOverTeamPlayers">
-        <tr>
-            <td><span data-bind="text: $root.getPlayerFullName($data);"></span></td>
-        </tr>
-        </tbody>
-
-    </table>
-</div>
-
+<nav-bar params="route: route"></nav-bar>
+<div id="page" class="container" data-bind="component: { name: route().page, params: route }"></div>
 <script src="../dist/scripts/main.js"></script>
 </body>
 </html>
