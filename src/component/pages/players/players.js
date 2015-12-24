@@ -4,6 +4,7 @@
 
 var ko = require('knockout');
 var $ = require('jquery');
+var config = require('../../../scripts/config');
 
 var playersViewModel = function() {
     var self = this;
@@ -66,7 +67,7 @@ var playersViewModel = function() {
 
     self.getTeams = function() {
         $.ajax({
-                url: 'http://rfxavier-001-site3.btempurl.com/api/team',
+                url: config.apiEndpoint.url + '/team',
                 type: 'GET',
                 dataType: 'jsonp',
                 data: {}
@@ -84,7 +85,7 @@ var playersViewModel = function() {
 
     self.getPlayers = function() {
         $.ajax({
-                url: 'http://rfxavier-001-site3.btempurl.com/api/player',
+                url: config.apiEndpoint.url + '/player',
                 type: 'GET',
                 dataType: 'jsonp',
                 data: {},
@@ -100,7 +101,7 @@ var playersViewModel = function() {
 
     self.insertPlayer = function(playerData) {
         $.ajax({
-                url: 'http://rfxavier-001-site3.btempurl.com/api/player',
+                url: config.apiEndpoint.url + '/player',
                 type: 'POST',
                 contentType: "application/json",
                 crossDomain: true,
@@ -122,7 +123,7 @@ var playersViewModel = function() {
 
     self.deletePlayer = function(playerId) {
         $.ajax({
-                url: 'http://rfxavier-001-site3.btempurl.com/api/player/' + playerId,
+                url: config.apiEndpoint.url + '/player/' + playerId,
                 type: 'DELETE',
                 crossDomain: true
             })

@@ -5,6 +5,7 @@
 var components = require('./components.js');
 var router = require('./router.js');
 var ko = require('knockout');
+var config = require('./config');
 
 var app = {
     init: function (){
@@ -15,6 +16,7 @@ var app = {
         };
 
         ko.applyBindings(mainViewModel);
+        console.log('Api Url:' + config.apiEndpoint.url);
     }
 };
 
