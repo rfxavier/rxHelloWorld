@@ -56,7 +56,10 @@ var playersViewModel = function() {
     };
 
     self.playerInsert = function () {
-        self.playerData.teamId = self.selectedTeam().teamId;
+        //self.playerData.teamId = self.selectedTeam().teamId;
+        //extend = linha acima, mesmo efeito, feito a título de aprendizado
+        //object literal in destination is put on top of object in source = (defaults)
+        ko.utils.extend(self.playerData, {teamId: self.selectedTeam().teamId});
 
         self.insertPlayer(ko.toJSON(self.playerData));
     };

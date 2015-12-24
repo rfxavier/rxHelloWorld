@@ -34,7 +34,8 @@ var router = function (config) {
 var routerInstance = new router({
     routes: [
         { url: '',          params: { page: 'page-home' } },
-        { url: 'players',   params: { page: 'page-players' } }
+        { url: 'players',   params: { page: 'page-players' } },
+        { url: 'teams',     params: { page: 'page-teams' } }
     ]
 });
 

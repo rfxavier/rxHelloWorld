@@ -29,5 +29,10 @@ module.exports = {
             viewModel: require('../component/pages/players/players.js'),
             template: require('fs').readFileSync(path.join(__dirname, '/../component/pages/players/players.html'), 'utf8')
         });
+
+        ko.components.register('page-teams', {
+            viewModel: require('../component/pages/teams/teams.js'),
+            template: require('fs').readFileSync(path.join(__dirname, '/../component/pages/teams/teams.html'), 'utf8')
+        });
     }
 };
