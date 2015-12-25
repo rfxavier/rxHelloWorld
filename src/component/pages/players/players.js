@@ -18,6 +18,8 @@ var playersViewModel = function() {
     self.inputFirstName = ko.observable();
     self.inputLastName = ko.observable();
     self.selectedTeam = ko.observable({});
+
+
     self.playerData  = {
         firstName: self.inputFirstName,
         lastName: self.inputLastName
@@ -38,6 +40,12 @@ var playersViewModel = function() {
     self.mousedOutTeam = function() {
         self.mousedOverTeam({});
     };
+
+    //todo - Find out why this manual subscription between viewModel properties does not work
+    //self.selectedTeam.subscribe(function(newValue) {
+    //    self.mousedOverTeam(newValue);
+    //    console.log(newValue);
+    //});
 
     self.getPlayerFullName = function(item) {
         return item.firstName + " " + item.lastName;

@@ -11,6 +11,7 @@
         <!--<td data-bind="text: teamName, event: { click: $parent.getTeamDetails(teamName) }"></td>-->
         <td><button data-bind="click: $parent.playerDelete.bind($data)">Delete</button></td>
     </tr>
+
     </tbody>
     <tr>
         <td><input type="text" data-bind="value: inputFirstName"></td>
@@ -24,9 +25,10 @@
 
 <!--todo Knockout DEBUG markup-->
 <div style="border: white dotted thin; clear: both">
-    <h4>Players JSON</h4>
-    <pre data-bind="text: koUtils.debugInfo(mousedOverTeamPlayers())"></pre>
+    <h4>Debug JSON</h4>
+    <pre data-bind="text: koUtils.debugInfo(selectedTeam())"></pre>
 </div>
+
 
 <div data-bind="visible: mousedOverTeamName()">
     <table>
