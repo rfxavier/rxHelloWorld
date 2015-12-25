@@ -6,8 +6,9 @@
     <tr>
         <td data-bind="text: firstName"></td>
         <td data-bind="text: lastName"></td>
-        <td data-bind="text: teamName, event: { mouseover: $parent.getTeamDetails.bind($data), mouseout: $parent.mousedOutTeam }"></td>
-        <!--<td data-bind="text: teamName, event: { click: $root.getTeamDetails(teamName) }"></td>-->
+        <td data-bind="text: teamName, event: { mouseover: $parent.getTeamDetails.bind($data) }"></td>
+        <!--<td data-bind="text: teamName, event: { mouseover: $parent.getTeamDetails.bind($data), mouseout: $parent.mousedOutTeam }"></td>-->
+        <!--<td data-bind="text: teamName, event: { click: $parent.getTeamDetails(teamName) }"></td>-->
         <td><button data-bind="click: $parent.playerDelete.bind($data)">Delete</button></td>
     </tr>
     </tbody>
@@ -18,9 +19,15 @@
                                optionsText: 'teamName',
                                value: selectedTeam"></select></td>
         <td><button data-bind="click: playerInsert">Insert</button></td>
-
     </tr>
 </table>
+
+<!--todo Knockout DEBUG markup-->
+<div style="border: white dotted thin; clear: both">
+    <h4>Players JSON</h4>
+    <pre data-bind="text: koUtils.debugInfo(mousedOverTeamPlayers())"></pre>
+</div>
+
 <div data-bind="visible: mousedOverTeamName()">
     <table>
         <thead>

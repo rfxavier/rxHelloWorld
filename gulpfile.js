@@ -13,7 +13,7 @@ var buffer = require('vinyl-buffer');
 var jshint = require('gulp-jshint');
 
 gulp.task('default', ['scripts','serve'], function () {
-    gulp.watch('*.html', browserSync.reload);
+    gulp.watch('**/*.html', browserSync.reload);
 });
 
 gulp.task('serve', function() {

@@ -5,13 +5,14 @@
 var ko = require('knockout');
 var crossroads = require('crossroads');
 var hasher = require('hasher');
+var config = require('./config.js');
 
-var router = function (config) {
+var router = function (routerConfig) {
     var self = this;
     self.currentRoute = ko.observable({});
     //console.log(config.routes);
 
-    ko.utils.arrayForEach(config.routes, function(route) {
+    ko.utils.arrayForEach(routerConfig.routes, function(route) {
         crossroads.addRoute(route.url, function(requestParams) {
             self.currentRoute(ko.utils.extend(requestParams, route.params));
         });
@@ -31,12 +32,6 @@ var router = function (config) {
 };
 
 // Create and export router instance
-var routerInstance = new router({
-    routes: [
-        { url: '',          params: { page: 'page-home' } },
-        { url: 'players',   params: { page: 'page-players' } },
-        { url: 'teams',     params: { page: 'page-teams' } }
-    ]
-});
+var routerInstance = new router({routes: config.routes});
 
 module.exports = routerInstance;

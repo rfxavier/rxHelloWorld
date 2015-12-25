@@ -5,9 +5,13 @@
 var ko = require('knockout');
 var $ = require('jquery');
 var config = require('../../../scripts/config');
+var koUtils = require('../../../modules/koDebugHelper.js');
 
 var playersViewModel = function() {
     var self = this;
+
+    //todo koUtils debug module - move from here?
+    self.koUtils = koUtils;
 
     self.players = ko.observableArray();
     self.teams = ko.observableArray();
@@ -20,13 +24,6 @@ var playersViewModel = function() {
     };
     self.mousedOverTeam = ko.observable({});
     self.mousedOverTeamName = ko.pureComputed(function() {
-        //var retTeamName = '';
-        //
-        //if (self.mousedOverTeam().teamName) {
-        //    retTeamName = 'Team ' + self.mousedOverTeam().teamName;
-        //}
-        //
-        //return retTeamName;
         return self.mousedOverTeam().teamName || '';
     });
     self.mousedOverTeamNameTitle = ko.pureComputed((function() {
@@ -116,7 +113,7 @@ var playersViewModel = function() {
                 //Refresh players and teams object arrays
                 self.getPlayers();
                 self.getTeams();
-                //if  self.mousedOverTeam is the same teams as just inserted, then self.getTeamDetails
+                //todo if  self.mousedOverTeam is the same teams as just inserted, then self.getTeamDetails
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
                 //console.log(jqXHR + "; " + textStatus + "; " + errorThrown)

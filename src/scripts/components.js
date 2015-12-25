@@ -21,7 +21,7 @@ module.exports = {
         });
 
         ko.components.register('page-home', {
-            viewModel: require('../component/pages/home/home.js'),
+            viewModel: require('../component/pages/home/home.js').activate,
             template: require('fs').readFileSync(path.join(__dirname, '/../component/pages/home/home.html'), 'utf8')
         });
 
