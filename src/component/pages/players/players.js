@@ -6,14 +6,15 @@ var ko = require('knockout');
 var $ = require('jquery');
 var config = require('../../../scripts/config');
 var koUtils = require('../../../modules/koDebugHelper.js');
+var datacontext = require('../../../modules/dataservices/datacontext.js');
 
-var playersViewModel = function() {
+var playersViewModel = function(pageParams) {
     var self = this;
 
     //todo koUtils debug module - move from here?
     self.koUtils = koUtils;
 
-    self.players = ko.observableArray();
+    this.players = pageParams.players; //ko.observableArray();
     self.teams = ko.observableArray();
     self.inputFirstName = ko.observable();
     self.inputLastName = ko.observable();
@@ -41,14 +42,11 @@ var playersViewModel = function() {
         self.mousedOverTeam({});
     };
 
-    //todo - Find out why this manual subscription between viewModel properties does not work
-/*
+    //working manual subscription between viewModel properties
     self.selectedTeam.subscribe(function(newValue) {
         //Initial value has to be an empty object - defaults to empty object
         self.mousedOverTeam(newValue || {});
-        console.log(newValue);
     });
-*/
 
     self.getPlayerFullName = function(item) {
         return item.firstName + " " + item.lastName;
@@ -94,6 +92,7 @@ var playersViewModel = function() {
 
     };
 
+/*
     self.getPlayers = function() {
         $.ajax({
                 url: config.apiEndpoint.url + '/player',
@@ -109,6 +108,7 @@ var playersViewModel = function() {
                 console.log(textStatus + "; " + errorThrown);
             });
     };
+*/
 
     self.insertPlayer = function(playerData) {
         $.ajax({
@@ -150,16 +150,8 @@ var playersViewModel = function() {
 
     //initialization when "new" is called
     self.getTeams();
-    self.getPlayers();
-    console.log('gotten Teams and Players');
+    //self.getPlayers();
+    console.log('gotten Teams');
 };
 
-//var playersViewModelInstance = new playersViewModel();
-
 module.exports = playersViewModel;
-
-//module.exports = {
-//    init : function () {
-//        ko.applyBindings(new playersViewModel());
-//    }
-//};

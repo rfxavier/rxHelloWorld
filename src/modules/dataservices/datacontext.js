@@ -27,8 +27,8 @@ var EntitySet = function(getFunction) {
                 getFunction({
                     success: function (dtoList) {
                         //items = mapToContext(dtoList, items, results, mapper, filter, sortFunction);
-                        items = dtoList;
-                        results(dtoList); //results = e.g.: self.players - observable array
+                        items = $.parseJSON(dtoList);
+                        results(items); //results = e.g.: self.players - observable array
                         def.resolve(results);
                     },
                     error: function (response) {
@@ -36,6 +36,7 @@ var EntitySet = function(getFunction) {
                         def.reject();
                     }
                 }, param);
+
             } else {
                 //itemsToArray(items, results, filter, sortFunction);
                 results(items);
