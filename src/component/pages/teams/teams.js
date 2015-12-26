@@ -74,7 +74,11 @@ var teamsViewModel = function() {
                 alert(jqXHR.responseJSON.message);
             });
     };
-    
+
+    self.activate = function() {
+        console.log("activating teams");
+    };
+
     self.getTeams();
 };
 

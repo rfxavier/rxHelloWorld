@@ -5,8 +5,8 @@
     <title>RenatoJS Players & Teams</title>
 </head>
 <body>
-<nav-bar params="route: route"></nav-bar>
-<div id="page" class="container" data-bind="component: { name: route().page, params: pageParams }"></div>
+<nav-bar params="route: pageParams.route"></nav-bar>
+<div id="page" class="container" data-bind="component: { name: pageParams.route().page, params: pageParams }"></div>
 <script src="../dist/scripts/main.js"></script>
 </body>
 </html>

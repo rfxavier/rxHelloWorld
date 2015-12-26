@@ -61,6 +61,10 @@ var playersViewModel = function(pageParams) {
         self.mousedOverTeam(filteredTeam[0]);
     };
 
+    self.reloadPlayers = function() {
+        $.when(datacontext.players.getData({results: self.players, forceRefresh: true}));
+    };
+
     self.playerInsert = function () {
         //self.playerData.teamId = self.selectedTeam().teamId;
         //extend = linha acima, mesmo efeito, feito a título de aprendizado
@@ -122,7 +126,7 @@ var playersViewModel = function(pageParams) {
                 self.inputFirstName('');
                 self.inputLastName('');
                 //Refresh players and teams object arrays
-                self.getPlayers();
+                self.reloadPlayers();
                 self.getTeams();
                 //todo if  self.mousedOverTeam is the same teams as just inserted, then self.getTeamDetails
             })
@@ -140,7 +144,7 @@ var playersViewModel = function(pageParams) {
             })
             .done(function(data, textStatus, jqXHR) {
                 //Refresh players and teams object arrays
-                self.getPlayers();
+                self.reloadPlayers();
                 self.getTeams();
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
@@ -152,6 +156,10 @@ var playersViewModel = function(pageParams) {
     self.getTeams();
     //self.getPlayers();
     console.log('gotten Teams');
+
+    self.activate = function() {
+        console.log("activating players");
+    };
 };
 
 module.exports = playersViewModel;
