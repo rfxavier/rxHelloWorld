@@ -19,21 +19,21 @@ var playersViewModel = function() {
     self.inputLastName = ko.observable();
     self.selectedTeam = ko.observable({});
 
-
+    //playerData = object literal to be serialized to json - data to be passed to api endpoint
     self.playerData  = {
         firstName: self.inputFirstName,
         lastName: self.inputLastName
     };
-    self.mousedOverTeam = ko.observable({});
+    self.mousedOverTeam = ko.observable({}); //initialized with empty object = default value
     self.mousedOverTeamName = ko.pureComputed(function() {
-        return self.mousedOverTeam().teamName || '';
+        return self.mousedOverTeam().teamName;
     });
     self.mousedOverTeamNameTitle = ko.pureComputed((function() {
-        return self.mousedOverTeamName() + " players";
+        return self.mousedOverTeamName() ? self.mousedOverTeamName() + " players" : undefined;
+        //ternary operator - iif: truthy, return team + " players", else return empty string ""
     }));
 
-    //self.mousedOverTeamPlayers = self.mousedOverTeam().players;
-    self.mousedOverTeamPlayers = ko.computed(function() {
+    self.mousedOverTeamPlayers = ko.pureComputed(function() {
         return self.mousedOverTeam().players;
     });
 
@@ -42,10 +42,13 @@ var playersViewModel = function() {
     };
 
     //todo - Find out why this manual subscription between viewModel properties does not work
-    //self.selectedTeam.subscribe(function(newValue) {
-    //    self.mousedOverTeam(newValue);
-    //    console.log(newValue);
-    //});
+/*
+    self.selectedTeam.subscribe(function(newValue) {
+        //Initial value has to be an empty object - defaults to empty object
+        self.mousedOverTeam(newValue || {});
+        console.log(newValue);
+    });
+*/
 
     self.getPlayerFullName = function(item) {
         return item.firstName + " " + item.lastName;
