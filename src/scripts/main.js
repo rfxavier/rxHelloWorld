@@ -8,11 +8,11 @@ var ko = require('knockout');
 var $ = require('jquery');
 var config = require('./config');
 var datacontext = require('../modules/dataservices/datacontext.js');
+var players = require('../component/pages/players/players.js');
+var pageViewModel = require('../modules/pageviewmodel.js');
 
 var app = {
     init: function (){
-        components.register();
-
         var players = ko.observableArray();
 
         var mainViewModel = {
@@ -23,11 +23,13 @@ var app = {
 
         $.when(datacontext.players.getData({results: players}))
             .done(function() {
+                pageViewModel.players.players(players());
                 ko.applyBindings(mainViewModel);
                 console.log('Api Url:' + config.apiEndpoint.url);
             });
+
+        components.register();
     }
 };
 
 app.init();
-

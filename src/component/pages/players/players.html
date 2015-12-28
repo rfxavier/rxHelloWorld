@@ -1,18 +1,41 @@
+<span data-bind="text: pagePar.page"></span>
 <table>
     <thead>
     <tr><th>First name</th><th>Last name</th><th>Team name</th></tr>
     </thead>
-    <tbody data-bind="foreach: players">
+    <tbody class="fn-players" data-bind="foreach: players">
     <tr>
         <td data-bind="text: firstName"></td>
         <td data-bind="text: lastName"></td>
-        <td data-bind="text: teamName, event: { mouseover: $parent.getTeamDetails.bind($data) }"></td>
+        <!--<td data-bind="text: teamName, event: { mouseover: $parent.getTeamDetails.bind($data) }"></td>-->
+        <td class="fn-playerdet" data-bind="text: teamName"></td>
+        <td><button class="fn-playerdel" data-bind="click: $parent.playerDelete.bind($data)">Delete</button></td>
+    </tr>
+
 <!--
+.bind(thisArg, param1, param2)
+in Knockout documentation, .bind( puts $data as 1st argument, 1st argument means thisArg, according to developer mozzila
+1st parameter of .bind is "ignored"
+
+it's the same:
+.bind($data, param1, param2)      = 2 params
+.bind(undefined, param1, param2)  = 2 params
+.bind(this, param1, param2)       = 2 params
+
+.bind($data, $data, param1, param2) = 3 params
+
+When NO .bind present (defaults), then parameters
+$data, event
+are passed to function
+this default behavior is equivalent of:
+.bind(undefined, $data, event)
+.bind(undefined)
+
+$data = binding data, dependent on CONTEXT
+
         <td data-bind="text: teamName, event: { mouseover: $parent.getTeamDetails.bind($data), mouseout: $parent.mousedOutTeam }"></td>
         <td data-bind="text: teamName, event: { click: $parent.getTeamDetails(teamName) }"></td>
 -->
-        <td><button data-bind="click: $parent.playerDelete.bind($data)">Delete</button></td>
-    </tr>
 
     </tbody>
     <tr>
@@ -21,17 +44,16 @@
         <td><select data-bind="options: teams,
                                optionsText: 'teamName',
                                value: selectedTeam"></select></td>
-        <td><button data-bind="click: playerInsert">Insert</button></td>
+        <td><button id="buttonInsert" data-bind="click: playerInsert">Insert</button></td>
+        <!--<td><button class="buttonInsert" data-bind="click: $component.initEventDelegates()">Insert</button></td>-->
     </tr>
 </table>
 
 <!--todo Knockout DEBUG markup-->
-<!--
-<div style="border: white dotted thin; clear: both">
-    <h4>Debug JSON</h4>
-    <pre data-bind="text: koUtils.debugInfo($data)"></pre>
-</div>
--->
+<!--<div style="border: white dotted thin; clear: both">-->
+    <!--<h4>Debug JSON</h4>-->
+    <!--<pre data-bind="text: koUtils.debugInfo($data)"></pre>-->
+<!--</div>-->
 
 
 <div data-bind="visible: mousedOverTeamName()">
@@ -41,7 +63,7 @@
         </thead>
         <tbody data-bind="foreach: mousedOverTeamPlayers">
         <tr>
-            <td><span data-bind="text: $parent.getPlayerFullName($data);"></span></td>
+            <td><span data-bind="text: $parent.getPlayerFullName($data)"></span></td>
         </tr>
         </tbody>
 

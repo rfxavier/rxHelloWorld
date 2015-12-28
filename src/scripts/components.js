@@ -11,6 +11,7 @@
 var ko    = require('knockout');
 var fs    = require('fs');
 var path  = require('path');
+var pageViewModel = require('../modules/pageviewmodel.js');
 
 module.exports = {
     register: function () {
@@ -26,10 +27,11 @@ module.exports = {
         });
 
         ko.components.register('page-players', {
-            viewModel: require('../component/pages/players/players.js'),
+            //viewModel: require('../component/pages/players/players.js'),
+            viewModel: { instance: pageViewModel.players },
             template: require('fs').readFileSync(path.join(__dirname, '/../component/pages/players/players.html'), 'utf8')
         });
-
+        //todo remove console.log(sharedvms.players);
         ko.components.register('page-teams', {
             viewModel: require('../component/pages/teams/teams.js'),
             template: require('fs').readFileSync(path.join(__dirname, '/../component/pages/teams/teams.html'), 'utf8')

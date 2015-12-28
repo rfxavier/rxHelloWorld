@@ -6,6 +6,7 @@ var ko = require('knockout');
 var crossroads = require('crossroads');
 var hasher = require('hasher');
 var vm = require('../modules/vm.js');
+var pageViewModel = require('../modules/pageviewmodel.js');
 
 var router = function (routerConfig) {
     var self = this;
@@ -15,7 +16,9 @@ var router = function (routerConfig) {
     ko.utils.arrayForEach(routerConfig.routes, function(route) {
         crossroads.addRoute(route.url, function(requestParams) {
             self.currentRoute(ko.utils.extend(requestParams, route.params));
-            //route.params.callback();
+            route.params.callback();
+            //route.params.instance.initEventDelegates && route.params.instance.initEventDelegates();
+            route.params.instance.pagePar = route.params;
         });
     });
     //crossroads.routed.add(console.log, console);
@@ -34,10 +37,10 @@ var router = function (routerConfig) {
 
 //todo callback for later
 var routes =  [
-               //{ url: '',          params: { page: 'page-home', callback: vm.home.activate} },
-               { url: '',          params: { page: 'page-home' } },
-               { url: 'players',   params: { page: 'page-players' } },
-               { url: 'teams',     params: { page: 'page-teams' } }
+               //{ url: '',          params: { page: 'page-home', callback: pageViewModel.players.activate} },
+               { url: '',          params: { page: 'page-home', callback: pageViewModel.players.activate, instance: pageViewModel.players} },
+               { url: 'players',   params: { page: 'page-players', callback: pageViewModel.players.activate, instance: pageViewModel.players} },
+               { url: 'teams',     params: { page: 'page-teams', callback: pageViewModel.players.activate, instance: pageViewModel.players} }
 ];
 
 // Create and export router instance

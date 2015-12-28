@@ -13,8 +13,10 @@ var playersViewModel = function(pageParams) {
 
     //todo koUtils debug module - move from here?
     self.koUtils = koUtils;
+    self.pagePar = ko.observable();
 
-    this.players = pageParams.players; //ko.observableArray();
+    //this.players = pageParams && pageParams.players; //ko.observableArray();
+    self.players = ko.observableArray();
     self.teams = ko.observableArray();
     self.inputFirstName = ko.observable();
     self.inputLastName = ko.observable();
@@ -159,7 +161,25 @@ var playersViewModel = function(pageParams) {
 
     self.activate = function() {
         console.log("activating players");
+        self.initEventDelegates();
+    };
+
+    self.initEventDelegates = function () {
+        //unobtrusive event handler
+        //uses jQuery instead of
+        //knockout's data-bind="click: playerInsert"
+        //console.log('init ev delegate');
+
+        //$(".buttonInsert").on("click", function () {
+        //    console.log('fired click');
+        //    self.playerInsert();
+        //});
+
+        $(".fn-players").on("mouseover", ".fn-playerdet", function() {
+            self.getTeamDetails(ko.dataFor(this));
+        });
     };
 };
+
 
 module.exports = playersViewModel;
