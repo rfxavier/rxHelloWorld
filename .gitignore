@@ -17,6 +17,7 @@
 # .idea/dataSources.ids
 /node_modules
 /dist
+/bower_components
 # .idea/dataSources.xml
 # .idea/sqlDataSources.xml
 # .idea/dynamic.xml

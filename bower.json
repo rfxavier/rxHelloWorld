@@ -1,0 +1,21 @@
+{
+  "name": "rxhw",
+  "description": "",
+  "main": "./src/scripts/main.js",
+  "authors": [
+    "RenatoFX <renatoferreiraxavier@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/rfxavier/rxHelloWorld",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "devextreme": "~15.2.4"
+  }
+}

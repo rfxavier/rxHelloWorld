@@ -28,10 +28,11 @@ gulp.task('serve', function() {
 gulp.task('scripts', function() {
     var b = browserify({
         entries: 'src/scripts/main.js',
-        debug: true
+        debug: true,
+        transform: ['brfs']
     });
 
-    b.transform('brfs');
+    //b.transform('brfs');
 
     b.bundle()
         .pipe(source('main.js'))

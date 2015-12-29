@@ -9,8 +9,8 @@ var configApp = function() {
     self.routes = {};
 
     //self.apiEndpoint.url = "http://localhost:6555/api";
-    self.apiEndpoint.url = "http://rfxavier-001-site3.btempurl.com/api";
-    //self.apiEndpoint.url = "http://playersapirx.azurewebsites.net/api";
+    //self.apiEndpoint.url = "http://rfxavier-001-site3.btempurl.com/api";
+    self.apiEndpoint.url = "http://playersapirx.azurewebsites.net/api";
 };
 
 module.exports = new configApp();
