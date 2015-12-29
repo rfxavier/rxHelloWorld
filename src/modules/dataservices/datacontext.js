@@ -49,5 +49,7 @@ var EntitySet = function(getFunction) {
 };
 
 var players = new EntitySet(dataservice.players.getPlayers);
+var teams = new EntitySet(dataservice.teams.getTeams);
 
-module.exports = {players: players};
+module.exports = {players: players,
+                    teams: teams};

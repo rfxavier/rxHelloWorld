@@ -5,6 +5,7 @@
 var ko = require('knockout');
 var $ = require('jquery');
 var config = require('../../../scripts/config');
+var datacontext = require('../../../modules/dataservices/datacontext.js');
 
 var teamsViewModel = function() {
     var self = this;
@@ -16,28 +17,16 @@ var teamsViewModel = function() {
         teamName: self.inputTeamName
     };
 
+    self.reloadData = function(forceRefresh) {
+        $.when(datacontext.teams.getData({results: self.teams, forceRefresh: forceRefresh}));
+    };
+
     self.teamInsert = function () {
         self.insertTeam(ko.toJSON(self.teamData));
     };
 
     self.teamDelete = function (team) {
         self.deleteTeam(team.teamId);
-    };
-
-    self.getTeams = function() {
-        $.ajax({
-                url: config.apiEndpoint.url + '/team',
-                type: 'GET',
-                dataType: 'jsonp',
-                data: {},
-                cache: false
-            })
-            .done(function(data, textStatus, jqXHR) {
-                self.teams(data);
-            })
-            .fail(function(jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseJSON.message);
-            });
     };
 
     self.insertTeam = function(teamData) {
@@ -51,7 +40,7 @@ var teamsViewModel = function() {
             .done(function(data, textStatus, jqXHR) {
                 self.inputTeamName('');
                 //Refresh teams and teams object arrays
-                self.getTeams();
+                self.reloadData(true);
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
                 //console.log(jqXHR + "; " + textStatus + "; " + errorThrown)
@@ -68,18 +57,32 @@ var teamsViewModel = function() {
             })
             .done(function(data, textStatus, jqXHR) {
                 //Refresh teams object arrays
-                self.getTeams();
+                self.reloadData(true);
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseJSON.message);
             });
     };
 
+    //initialization when "new" is called
+    //...
+
     self.activate = function() {
         console.log("activating teams");
+        self.initEventDelegates();
+        self.reloadData(false);
     };
 
-    self.getTeams();
+    self.initEventDelegates = function () {
+        //jQuery event Delegates
+        //For applying into .fn-players container
+
+        //on click for every element with selector .fn-teamdel inside container with selector .fn-teams
+        $(".fn-teams").on("click", ".fn-teamdel", function() {
+            self.teamDelete(ko.dataFor(this));
+        });
+    };
+
 };
 
 module.exports = teamsViewModel;

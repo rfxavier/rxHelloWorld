@@ -2,33 +2,27 @@
  * Created by RENATO on 22/12/2015.
  */
 
-var components = require('./components.js');
-var router = require('./router.js');
 var ko = require('knockout');
 var $ = require('jquery');
-var config = require('./config');
-var datacontext = require('../modules/dataservices/datacontext.js');
+
+var dataprimer = require('../modules/dataprimer.js');
+var components = require('./components.js');
+var router = require('./router.js');
 var players = require('../component/pages/players/players.js');
-var pageViewModel = require('../modules/pageviewmodel.js');
 
 var app = {
     init: function (){
-        var players = ko.observableArray();
 
-        var mainViewModel = {
-            pageParams: {route: router.currentRoute,
-                         players: players
-            }
+        var mainViewModel = function() {
+            return { pageParams: {route: router.currentRoute} }
         };
 
-        $.when(datacontext.players.getData({results: players}))
-            .done(function() {
-                pageViewModel.players.players(players());
-                ko.applyBindings(mainViewModel);
-                console.log('Api Url:' + config.apiEndpoint.url);
-            });
-
+        //pageViewModel 1st require AND REFERENCE - instances are born
         components.register();
+
+        //router 1st require AND REFERENCE - instance is born
+        $.when(dataprimer.fetch())
+            .done(ko.applyBindings(new mainViewModel()));
     }
 };
 

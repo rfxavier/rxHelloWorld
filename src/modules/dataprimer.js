@@ -3,6 +3,7 @@
  */
 
 var ko = require('knockout');
+var $ = require('jquery');
 var config = require('../scripts/config.js');
 var datacontext = require('./dataservices/datacontext.js');
 
@@ -19,6 +20,10 @@ var fetch = function() {
                 .fail(function () { def.reject(); })
                 .done(function () { def.resolve(); })
         )
+            .done(function() {
+                console.log(data.players().length + ' players');
+                console.log(data.teams().length + ' teams');
+            })
     }).promise();
 };
 

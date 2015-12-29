@@ -13,9 +13,7 @@ var playersViewModel = function(pageParams) {
 
     //todo koUtils debug module - move from here?
     self.koUtils = koUtils;
-    self.pagePar = ko.observable();
 
-    //this.players = pageParams && pageParams.players; //ko.observableArray();
     self.players = ko.observableArray();
     self.teams = ko.observableArray();
     self.inputFirstName = ko.observable();
@@ -63,8 +61,9 @@ var playersViewModel = function(pageParams) {
         self.mousedOverTeam(filteredTeam[0]);
     };
 
-    self.reloadPlayers = function() {
-        $.when(datacontext.players.getData({results: self.players, forceRefresh: true}));
+    self.reloadData = function(forceRefresh) {
+        $.when(datacontext.players.getData({results: self.players, forceRefresh: forceRefresh}),
+               datacontext.teams.getData({results: self.teams, forceRefresh: forceRefresh}));
     };
 
     self.playerInsert = function () {
@@ -80,42 +79,6 @@ var playersViewModel = function(pageParams) {
         self.deletePlayer(player.playerId);
     };
 
-    self.getTeams = function() {
-        $.ajax({
-                url: config.apiEndpoint.url + '/team',
-                type: 'GET',
-                dataType: 'jsonp',
-                data: {}
-            })
-            .done(function(data, textStatus, jqXHR) {
-                self.teams(data);
-                //console.log(self.teams());
-
-            })
-            .fail(function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus + "; " + errorThrown);
-            });
-
-    };
-
-/*
-    self.getPlayers = function() {
-        $.ajax({
-                url: config.apiEndpoint.url + '/player',
-                type: 'GET',
-                dataType: 'jsonp',
-                data: {},
-                cache: false
-            })
-            .done(function(data, textStatus, jqXHR) {
-                self.players(data);
-            })
-            .fail(function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus + "; " + errorThrown);
-            });
-    };
-*/
-
     self.insertPlayer = function(playerData) {
         $.ajax({
                 url: config.apiEndpoint.url + '/player',
@@ -128,8 +91,7 @@ var playersViewModel = function(pageParams) {
                 self.inputFirstName('');
                 self.inputLastName('');
                 //Refresh players and teams object arrays
-                self.reloadPlayers();
-                self.getTeams();
+                self.reloadData(true);
                 //todo if  self.mousedOverTeam is the same teams as just inserted, then self.getTeamDetails
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
@@ -146,8 +108,7 @@ var playersViewModel = function(pageParams) {
             })
             .done(function(data, textStatus, jqXHR) {
                 //Refresh players and teams object arrays
-                self.reloadPlayers();
-                self.getTeams();
+                self.reloadData(true);
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + "; " + errorThrown);
@@ -155,31 +116,35 @@ var playersViewModel = function(pageParams) {
     };
 
     //initialization when "new" is called
-    self.getTeams();
-    //self.getPlayers();
-    console.log('gotten Teams');
+    //...
 
     self.activate = function() {
         console.log("activating players");
         self.initEventDelegates();
+        self.reloadData(false);
     };
 
     self.initEventDelegates = function () {
         //unobtrusive event handler
         //uses jQuery instead of
         //knockout's data-bind="click: playerInsert"
-        //console.log('init ev delegate');
 
         //$(".buttonInsert").on("click", function () {
-        //    console.log('fired click');
         //    self.playerInsert();
         //});
 
-        $(".fn-players").on("mouseover", ".fn-playerdet", function() {
+        //jQuery event Delegates
+        //For applying into .fn-players container
+        //on mouseover for every element with selector .fn-teamdet inside container with selector .fn-players
+        $(".fn-players").on("mouseover", ".fn-teamdet", function() {
             self.getTeamDetails(ko.dataFor(this));
+        });
+
+        //on click for every element with selector .fn-playerdel inside container with selector .fn-players
+        $(".fn-players").on("click", ".fn-playerdel", function() {
+            self.playerDelete(ko.dataFor(this));
         });
     };
 };
-
 
 module.exports = playersViewModel;

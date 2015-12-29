@@ -23,18 +23,20 @@ module.exports = {
 
         ko.components.register('page-home', {
             viewModel: require('../component/pages/home/home.js'),
-            template: require('fs').readFileSync(path.join(__dirname, '/../component/pages/home/home.html'), 'utf8')
+            template: require('fs').readFileSync(path.join(__dirname, '/../component/pages/home/home.html'), 'utf8'),
+            synchronous: true       //to be compatible with jQuery event registration. Async would not register jQuery events
         });
 
         ko.components.register('page-players', {
-            //viewModel: require('../component/pages/players/players.js'),
             viewModel: { instance: pageViewModel.players },
-            template: require('fs').readFileSync(path.join(__dirname, '/../component/pages/players/players.html'), 'utf8')
+            template: require('fs').readFileSync(path.join(__dirname, '/../component/pages/players/players.html'), 'utf8'),
+            synchronous: true       //to be compatible with jQuery event registration. Async would not register jQuery events
         });
-        //todo remove console.log(sharedvms.players);
+
         ko.components.register('page-teams', {
-            viewModel: require('../component/pages/teams/teams.js'),
-            template: require('fs').readFileSync(path.join(__dirname, '/../component/pages/teams/teams.html'), 'utf8')
+            viewModel: { instance: pageViewModel.teams },
+            template: require('fs').readFileSync(path.join(__dirname, '/../component/pages/teams/teams.html'), 'utf8'),
+            synchronous: true       //to be compatible with jQuery event registration. Async would not register jQuery events
         });
     }
 };
