@@ -1,3 +1,6 @@
+<!-- ko if: reloadData(false) -->
+<!-- /ko -->
+
 <table>
     <thead>
     <tr><th>First name</th><th>Last name</th><th>Team name</th></tr>
@@ -47,10 +50,10 @@ $data = binding data, dependent on CONTEXT
 </table>
 
 <!--todo Knockout DEBUG markup-->
-<div style="border: white dotted thin; clear: both">
-    <h4>Debug JSON</h4>
-    <pre data-bind="text: koUtils.debugInfo($data)"></pre>
-</div>
+<!--<div style="border: white dotted thin; clear: both">-->
+    <!--<h4>Debug JSON</h4>-->
+    <!--<pre data-bind="text: koUtils.debugInfo($data)"></pre>-->
+<!--</div>-->
 
 <div data-bind="visible: mousedOverTeamName()">
     <table>

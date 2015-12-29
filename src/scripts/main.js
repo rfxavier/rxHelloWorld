@@ -8,21 +8,24 @@ var $ = require('jquery');
 var dataprimer = require('../modules/dataprimer.js');
 var components = require('./components.js');
 var router = require('./router.js');
-var players = require('../component/pages/players/players.js');
+var pageViewModel = require('../modules/pageviewmodel.js');
 
 var app = {
     init: function (){
 
-        var mainViewModel = function() {
-            return { pageParams: {route: router.currentRoute} }
-        };
+        //var mainViewModel = function() {
+        //    return { pageParams: {route: router.currentRoute} }
+        //};
+
+        var mainViewModel = { pageParams: {route: router.currentRoute} };
 
         //pageViewModel 1st require AND REFERENCE - instances are born
-        components.register();
+        //components.register();
 
         //router 1st require AND REFERENCE - instance is born
         $.when(dataprimer.fetch())
-            .done(ko.applyBindings(new mainViewModel()));
+            .done(components.register())
+            .done(ko.applyBindings(mainViewModel));
     }
 };
 

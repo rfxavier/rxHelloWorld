@@ -17,7 +17,7 @@ var router = function (routerConfig) {
             route.params.callback && route.params.callback();
         });
     });
-    crossroads.routed.add(console.log, console);
+    //crossroads.routed.add(console.log, console);
 
     // Activate Crossroads
     crossroads.normalizeFn = crossroads.NORM_AS_OBJECT;
