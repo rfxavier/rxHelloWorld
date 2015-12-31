@@ -1,7 +1,7 @@
 /**
  * Created by RENATO on 12/12/2015.
  */
-
+//process.env.BROWSERIFYSHIM_DIAGNOSTICS=1
 var gulp = require('gulp');
 
 var browserSync = require('browser-sync').create();

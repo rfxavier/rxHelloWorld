@@ -22,7 +22,7 @@ module.exports = {
         });
 
         ko.components.register('page-home', {
-            viewModel: require('../component/pages/home/home.js'),
+            viewModel: { instance: pageViewModel.home },
             template: require('fs').readFileSync(path.join(__dirname, '/../component/pages/home/home.html'), 'utf8'),
             synchronous: true       //to be compatible with jQuery event registration. Async would not register jQuery events
         });

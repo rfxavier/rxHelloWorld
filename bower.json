@@ -16,6 +16,9 @@
     "tests"
   ],
   "dependencies": {
-    "devextreme": "~15.2.4"
+    "devextreme": "~15.2.4",
+    "jquery": "~2.1.4",
+    "knockout": "~3.4.0",
+    "globalize": "~1.0.0"
   }
 }
