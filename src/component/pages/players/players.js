@@ -118,8 +118,10 @@ var playersViewModel = function(pageParams) {
     //initialization when "new" is called
     //...
 
-    self.activate = function() {
+    self.activate = function(queryParams) {
+        //queryParams - coming from url params on the route, as object
         console.log("activating players");
+        console.log(queryParams);
         self.initEventDelegates();
         self.reloadData(false);
     };

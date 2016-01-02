@@ -5,6 +5,8 @@
 var $ = require('jquery');
 var ko = require('knockout');
 var datacontext = require('../../../modules/dataservices/datacontext.js');
+var hasher = require('hasher');
+
 //var $data = require('jaydata');
 
 var pageHomeViewModel = function() {
@@ -17,6 +19,16 @@ var pageHomeViewModel = function() {
 
     self.players = ko.observableArray();
     self.teams = ko.observableArray();
+
+
+    self.navigateToTeams = function() {
+        console.log('navigateToTeams');
+        hasher.setHash('teams');
+    };
+
+    self.dxButtonOptions  = {
+        text: 'Navigate to Teams',
+        onClick: self.navigateToTeams };
 
     self.dataGridOptions = {
         dataSource: self.players,

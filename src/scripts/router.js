@@ -14,7 +14,7 @@ var router = function (routerConfig) {
     ko.utils.arrayForEach(routerConfig.routes, function(route) {
         crossroads.addRoute(route.url, function(requestParams) {
             self.currentRoute(ko.utils.extend(requestParams, route.params));
-            route.params.callback && route.params.callback();
+            route.params.callback && route.params.callback(ko.utils.extend(requestParams, route.params));
         });
     });
     //crossroads.routed.add(console.log, console);
@@ -25,16 +25,27 @@ var router = function (routerConfig) {
     hasher.initialized.add(function(hash) {
         crossroads.parse(hash);
     });
-    hasher.changed.add(function(hash) {
-        crossroads.parse(hash);
+    hasher.changed.add(function(hash, oldHash) {
+        if (pageViewModel.teams && pageViewModel.teams.isDirty()){
+            console.log('cant leave from ' + oldHash + ' to ' + hash);
+            hasher.changed.active = false;
+            hasher.setHash(oldHash);
+            hasher.changed.active = true;
+            alert('cant leave. dirty.');
+        }
+        else {
+            crossroads.parse(hash);
+            console.log('hasher.changed from ' + oldHash + ' to ' + hash);
+            }
     });
     hasher.init();
 };
 
 var routes =  [
-               { url: '',          params: { page: 'page-home', callback: pageViewModel.home.activate} },
-               { url: 'players',   params: { page: 'page-players', callback: pageViewModel.players.activate} },
-               { url: 'teams',     params: { page: 'page-teams', callback: pageViewModel.teams.activate} }
+               { url: '',                  params: { page: 'page-home', callback: pageViewModel.home.activate} },
+               { url: 'players',           params: { page: 'page-players', callback: pageViewModel.players.activate} },
+               { url: 'players{?query}',   params: { page: 'page-players', callback: pageViewModel.players.activate} },
+               { url: 'teams',             params: { page: 'page-teams', callback: pageViewModel.teams.activate} }
 ];
 
 // Create and export router instance

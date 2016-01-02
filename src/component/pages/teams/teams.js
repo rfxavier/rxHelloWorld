@@ -10,6 +10,24 @@ var datacontext = require('../../../modules/dataservices/datacontext.js');
 var teamsViewModel = function() {
     var self = this;
 
+    self.isDirty = ko.observable(false);
+    self.isDirtyState = ko.pureComputed(function(){
+       if (self.isDirty()) {
+           return 'Dirty'
+       }
+        else {
+           return 'Clean'
+       }
+    });
+
+    self.toggleDirty = function() {
+        self.isDirty(!self.isDirty());
+    };
+
+    self.dxButtonOptions  = {
+        text: self.isDirtyState,
+        onClick: self.toggleDirty };
+
     self.teams = ko.observableArray();
     self.inputTeamName = ko.observable();
 
