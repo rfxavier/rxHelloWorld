@@ -6,15 +6,20 @@
 
     <link rel="stylesheet" type="text/css" href="./bower_components/devextreme/css/dx.common.css" />
     <link rel="stylesheet" type="text/css" href="./bower_components/devextreme/css/dx.light.css" />
+    <link rel="stylesheet" href="../../dist/styles/main.css">
 </head>
 <body>
-<nav-bar params="route: pageParams.route"></nav-bar>
-<div id="page" class="container" data-bind="component: { name: pageParams.route().page, params: pageParams }"></div>
+<div class="container-fluid">
+    <nav-bar params="route: pageParams.route"></nav-bar>
+    <div id="page" class="container" data-bind="component: { name: pageParams.route().page, params: pageParams }"></div>
+</div>
 
 <script type="text/javascript" src="./bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="./bower_components/globalize/lib/globalize.js"></script>
 <script type="text/javascript" src="./bower_components/knockout/dist/knockout.js"></script>
 <script type="text/javascript" src="./bower_components/devextreme/js/dx.all.js"></script>
+
+<script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
 
 <script src="../dist/scripts/main.js"></script>
 </body>

@@ -23,6 +23,10 @@ var pageHomeViewModel = function() {
 
     self.navigateToTeams = function() {
         console.log('navigateToTeams');
+        //not setting navbar active bootstrap css class
+        //route().page does not change, active link visual is lost
+        //params="route: pageParams.route"
+        //try to implement via pub/sub
         hasher.setHash('teams');
     };
 

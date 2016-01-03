@@ -7,12 +7,15 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var sourceMaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
+var minifyCss = require('gulp-minify-css');
+var autoprefixer = require('gulp-autoprefixer');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var jshint = require('gulp-jshint');
+var less = require('gulp-less');
 
-gulp.task('default', ['scripts','serve'], function () {
+gulp.task('default', ['scripts','styles','serve'], function () {
     gulp.watch('**/*.html', browserSync.reload);
 });
 
@@ -48,5 +51,16 @@ gulp.task('lint', function(){
     gulp.src(['src/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
+});
+
+gulp.task('styles', function(){
+    gulp.src(['src/styles/main.less'])
+        .pipe(sourceMaps.init())
+        .pipe(less())
+        .pipe(autoprefixer())
+        .pipe(minifyCss())
+        .pipe(sourceMaps.write())
+        .pipe(gulp.dest('dist/styles'))
+        .pipe(browserSync.stream());
 });
 

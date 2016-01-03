@@ -1,0 +1,24 @@
+        <!--
+        .bind(thisArg, param1, param2)
+        in Knockout documentation, .bind( puts $data as 1st argument, 1st argument means thisArg, according to developer mozzila
+        1st parameter of .bind is "ignored"
+
+        it's the same:
+        .bind($data, param1, param2)      = 2 params
+        .bind(undefined, param1, param2)  = 2 params
+        .bind(this, param1, param2)       = 2 params
+
+        .bind($data, $data, param1, param2) = 3 params
+
+        When NO .bind present (defaults), then parameters
+        $data, event
+        are passed to function
+        this default behavior is equivalent of:
+        .bind(undefined, $data, event)
+        .bind(undefined)
+
+        $data = binding data, dependent on CONTEXT
+
+                <td data-bind="text: teamName, event: { mouseover: $parent.getTeamDetails.bind($data), mouseout: $parent.mousedOutTeam }"></td>
+                <td data-bind="text: teamName, event: { click: $parent.getTeamDetails(teamName) }"></td>
+        -->
