@@ -1,5 +1,8 @@
 @import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 
+//noinspection CssUnknownTarget
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800|Roboto+Slab:400,100,300,700);
+
 //overriding bootstrap .navbar
 .navbar {
   border-radius: 0;
@@ -8,4 +11,21 @@
 
 body {
   padding-top: 60px;
+  font-family: "Roboto Slab", sans-serif;
+  font-weight: 300;
+  font-size:2em;
+  position: relative
+}
+
+.navbar-header .navbar-brand {
+  padding: 7px;
+  font-weight: 400;
+  font-size: 1.2em;
+}
+
+.navbar-header .navbar-brand span.subhead {
+  display: block;
+  font-family: "Roboto Slab", serif;
+  font-size: .6em;
+  font-weight: 100;
 }
