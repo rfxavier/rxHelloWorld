@@ -13,10 +13,12 @@
 
 var home = require('../component/pages/home/home.js');
 var players = require('../component/pages/players/players.js');
+var playersDX = require('../component/pages/playersDX/playersDX.js');
 var teams = require('../component/pages/teams/teams.js');
 
 var homeViewModelInstance = new home;
 var playersViewModelInstance = new players;
+var playersDXViewModelInstance = new playersDX;
 var teamsViewModelInstance = new teams;
 
 /**
@@ -25,4 +27,5 @@ var teamsViewModelInstance = new teams;
  */
 module.exports = {home: homeViewModelInstance,
                   players: playersViewModelInstance,
+                  playersDX: playersDXViewModelInstance,
                   teams: teamsViewModelInstance};

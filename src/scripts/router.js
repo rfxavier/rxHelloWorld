@@ -42,10 +42,12 @@ var router = function (routerConfig) {
 };
 
 var routes =  [
-               { url: '',                  params: { page: 'page-home', callback: pageViewModel.home.activate} },
-               { url: 'players',           params: { page: 'page-players', callback: pageViewModel.players.activate} },
-               { url: 'players{?query}',   params: { page: 'page-players', callback: pageViewModel.players.activate} },
-               { url: 'teams',             params: { page: 'page-teams', callback: pageViewModel.teams.activate} }
+               { url: '',                    params: { page: 'page-home', callback: pageViewModel.home.activate} },
+               { url: 'players',             params: { page: 'page-players', callback: pageViewModel.players.activate} },
+               { url: 'players{?query}',     params: { page: 'page-players', callback: pageViewModel.players.activate} },
+               { url: 'playersDX',           params: { page: 'page-playersDX', callback: pageViewModel.playersDX.activate} },
+               { url: 'playersDX{?query}',   params: { page: 'page-playersDX', callback: pageViewModel.playersDX.activate} },
+               { url: 'teams',               params: { page: 'page-teams', callback: pageViewModel.teams.activate} }
 ];
 
 // Create and export router instance

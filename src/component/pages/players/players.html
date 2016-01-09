@@ -18,7 +18,10 @@
             <tr>
                 <td><input type="text" size = "16" data-bind="value: inputFirstName"></td>
                 <td><input type="text" size = "16" data-bind="value: inputLastName"></td>
-                <td><select data-bind="options: teams,
+                <!--<td><button type="button" class="btn btn-small dropdown-toggle" data-toggle="dropdown"></button>-->
+                    <!--<span data-bind="text: selectedTeam()"> </span> <span class="caret"></span>-->
+                <!--</td>-->
+                <td><select class="rx-form-control form-control" data-bind="options: teams,
                                        optionsText: 'teamName',
                                        value: selectedTeam"></select></td>
                 <td><button id="buttonInsert" data-bind="click: playerInsert">Insert</button></td>
@@ -39,8 +42,8 @@
     </div>
 </div>
 <!--todo Knockout DEBUG markup-->
-<!--<div style="border: white dotted thin; clear: both">-->
-    <!--<h4>Debug JSON</h4>-->
-    <!--<pre data-bind="text: koUtils.debugInfo($data)"></pre>-->
-<!--</div>-->
+<div style="border: white dotted thin; clear: both">
+    <h4>Debug JSON</h4>
+    <pre data-bind="text: koUtils.debugInfo($data)"></pre>
+</div>
 

@@ -24,8 +24,8 @@ var app = {
 
         //router 1st require AND REFERENCE - instance is born
         $.when(dataprimer.fetch())
-            .done(components.register())
-            .done(ko.applyBindings(mainViewModel));
+            .then(components.register())
+            .then(ko.applyBindings(mainViewModel));
     }
 };
 

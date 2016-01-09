@@ -41,7 +41,7 @@ gulp.task('scripts', function() {
         .pipe(source('main.js'))
         .pipe(buffer())
         .pipe(sourceMaps.init({loadMaps: true}))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(sourceMaps.write('./'))
         .pipe(gulp.dest('dist/scripts/'))
         .pipe(browserSync.stream());

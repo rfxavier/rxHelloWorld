@@ -33,6 +33,12 @@ module.exports = {
             synchronous: true       //to be compatible with jQuery event registration. Async would not register jQuery events
         });
 
+        ko.components.register('page-playersDX', {
+            viewModel: { instance: pageViewModel.playersDX },
+            template: require('fs').readFileSync(path.join(__dirname, '/../component/pages/playersDX/playersDX.html'), 'utf8'),
+            synchronous: true       //to be compatible with jQuery event registration. Async would not register jQuery events
+        });
+
         ko.components.register('page-teams', {
             viewModel: { instance: pageViewModel.teams },
             template: require('fs').readFileSync(path.join(__dirname, '/../component/pages/teams/teams.html'), 'utf8'),
