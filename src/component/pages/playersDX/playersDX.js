@@ -42,6 +42,12 @@ var playersDXViewModel = function(pageParams) {
         }
     });
 
+    self.dataContentReady = function() {
+        //!$("#gridPlayers").dxDataGrid('instance')._options.dataSource._isLoaded && $("#gridPlayers") && $("#gridPlayers").dxDataGrid('instance') && $("#gridPlayers").dxDataGrid('instance').refresh();
+        $("#gridPlayers").dxDataGrid('instance')._options.dataSource._items.length === 0 && $("#gridPlayers") && $("#gridPlayers").dxDataGrid('instance') && $("#gridPlayers").dxDataGrid('instance').refresh();
+        console.log('onContentReady');
+    };
+
     self.dataGridOptions = {
         dataSource: self.dxDataSource,
         scrolling: {
@@ -51,7 +57,8 @@ var playersDXViewModel = function(pageParams) {
             mode: "row",
             allowDeleting: true
         },
-        columns: ["firstName", "lastName", "teamName"]
+        columns: ["firstName", "lastName", "teamName"],
+        onContentReady: self.dataContentReady
     };
 
     self.reloadData = function(forceRefresh) {
@@ -64,18 +71,16 @@ var playersDXViewModel = function(pageParams) {
     self.activate = function() {
         //self.initEventDelegates();
         console.log(self.players());
-        self.reloadData(self.players().length===0)
-            .then(function () {
-                console.log(self.players());
-                console.log( $("#gridPlayers").dxDataGrid('instance'));
-                $("#gridPlayers").dxDataGrid && $("#gridPlayers").dxDataGrid('instance') && $("#gridPlayers").dxDataGrid('instance').refresh();
-                //var datagrid = $("#gridContainer").dxDataGrid('instance');
-                //datagrid.refresh();
-
-            });
-        var grid = $("#gridPlayers").dxDataGrid('instance');
-        console.log(grid);
-        console.log("activating playersDX");
+        self.reloadData(false);
+        //self.reloadData(self.players().length===0)
+        //    .then(function () {
+        //        console.log(self.players());
+        //        console.log( $("#gridPlayers").dxDataGrid('instance'));
+        //        $("#gridPlayers").dxDataGrid && $("#gridPlayers").dxDataGrid('instance') && $("#gridPlayers").dxDataGrid('instance').refresh();
+        //        //var datagrid = $("#gridContainer").dxDataGrid('instance');
+        //        //datagrid.refresh();
+        //
+        //    });
     };
 };
 

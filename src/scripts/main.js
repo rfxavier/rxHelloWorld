@@ -19,10 +19,16 @@ var app = {
 
         var mainViewModel = { pageParams: {route: router.currentRoute} };
 
-        //pageViewModel 1st require AND REFERENCE - instances are born
-        //components.register();
+        //** Inside components.register()
+        //require of pageViewModel.js for the 1st time, get pageViewModel instances born
+        //pageViewModel.home
+        //pageViewModel.players
+        //pageViewModel.playersDX
+        //pageViewModel.teams
 
-        //router 1st require AND REFERENCE - instance is born
+        //** From the top of the page
+        //require of router.js for the 1st time, instantiates router.js constructor and gets
+        //a router object to router var
         $.when(dataprimer.fetch())
             .then(components.register())
             .then(ko.applyBindings(mainViewModel));
