@@ -62,7 +62,8 @@ var teamsViewModel = function() {
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
                 //console.log(jqXHR + "; " + textStatus + "; " + errorThrown)
-                alert(jqXHR.responseJSON.message);
+                DevExpress.ui.notify(jqXHR.responseJSON.message, "error", 1200);
+                //alert(jqXHR.responseJSON.message);
             });
     };
 

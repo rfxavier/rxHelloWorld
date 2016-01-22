@@ -4,6 +4,10 @@
 <table>
     <thead>
     <tr><th>Team name</th></tr>
+    <tr>
+        <td><input class="form-control" type="text" data-bind="value: inputTeamName"></td>
+        <td><button data-bind="click: teamInsert">Insert</button></td>
+    </tr>
     </thead>
     <tbody class="fn-teams" data-bind="foreach: teams">
     <tr>
@@ -11,11 +15,6 @@
         <td><button class="fn-teamdel">Delete</button></td>
     </tr>
     </tbody>
-    <tr>
-        <td><input type="text" data-bind="value: inputTeamName"></td>
-
-        <td><button data-bind="click: teamInsert">Insert</button></td>
-    </tr>
 </table>
 <div data-bind="dxButton: dxButtonOptions"></div>
 <!--<div data-bind="dxButton: {text: isDirty }"></div>-->
